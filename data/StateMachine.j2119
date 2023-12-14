@@ -167,8 +167,10 @@ A Wait State MUST have a field named one of "Seconds", "SecondsPath", "Timestamp
 A Parallel State MUST have an object-array field named "Branches"; each element is a "Branch".
 A Map State MAY have an object field named "Iterator"; its value is a "Branch".
 A Map State MAY have an object field named "ItemProcessor".
+A Map State MAY have an object field named "ItemSelector".
 A Map State MAY have a referencePath field named "ItemsPath".
 A Map State MAY have a numeric field named "MaxConcurrency".
+A Map State MAY have a string field named "Label".
 A Branch MUST have an object field named "States"; each field is a "State".
 A Branch MUST have a string field named "StartAt".
 A Branch MAY have a string field named "Comment".
