@@ -175,7 +175,7 @@ A Map State MAY have an object field named "ItemSelector".
 A Map State MAY have only one of "ItemSelector" and "Parameters".
 A Map State MAY have a numeric field named "MaxConcurrency".
 A Map State MAY have a string field named "Label".
-A Map State MAY have a ToleratedFailurePercentage field whose value MUST be a number between zero and 100
+A Map State MAY have a float field named ToleratedFailurePercentage whose value MUST be a number between zero and 100
 A Map State MAY have a non-negative integer ToleratedFailureCount field
 A Map State MUST NOT include both ToleratedFailureCount and ToleratedFailureCountPath
 A Map State MUST NOT include both ToleratedFailurePercentage and ToleratedFailurePercentagePath
