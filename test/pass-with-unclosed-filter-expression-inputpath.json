@@ -1,0 +1,10 @@
+{
+  "StartAt": "p",
+  "States": {
+    "p": {
+      "Type": "Pass",
+      "InputPath": "$.result.usages[?(@.Status == 'FAILED').Cause",
+      "End": true
+    }
+  }
+}

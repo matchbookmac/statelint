@@ -1,0 +1,23 @@
+{
+  "StartAt": "m",
+  "States": {
+    "m": {
+      "Type": "Map",
+      "ItemProcessor": {
+        "StartAt": "x",
+        "States": {
+          "x": {
+            "Type": "Pass",
+            "End": true
+          }
+        }
+      },
+      "ToleratedFailurePercentage": 100,
+      "ResultSelector": {
+        "failed.$": "$[?(@.Status == 'FAILED')].Cause",
+        "small.$": "$.items[?(@.size < 10 && (@.kind == 'a' || @.kind == 'b'))]"
+      },
+      "End": true
+    }
+  }
+}

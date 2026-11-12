@@ -20,6 +20,8 @@ module StateMachineLint
   #
   class StateNode
 
+    JSONPATH_FILTER_STEP = /\[\?\((?:[^()\[\]]|\([^()\[\]]*\))+\)\]/
+
     def initialize
       # We push States nodes on here when we traverse them.
       #  Then, whenever we find a "Next" or "Default" or "StartAt" node,
@@ -196,12 +198,9 @@ module StateMachineLint
         return false
       end
       # If the value begins with “$$”, the first dollar character is stripped off and the remainder MUST be a Path.
-      if val.start_with?("$$")
-        path_to_check = val.gsub(/^\$/, "")
-        J2119::JSONPathChecker.is_path?(path_to_check)
-      else
-        J2119::JSONPathChecker.is_path?(val)
-      end
+      path_to_check = val.start_with?("$$") ? val.sub(/^\$/, "") : val
+      # Step Functions accepts JSONPath filter steps, which j2119 doesn't model; they select like [*].
+      J2119::JSONPathChecker.is_path?(path_to_check.gsub(JSONPATH_FILTER_STEP, "[*]"))
     end
 
     def check_for_terminal(node, path, problems)

@@ -477,4 +477,25 @@ describe StateMachineLint do
     problems = linter.validate(j)
     expect(problems.size).to eq(0)
   end
+
+  it 'should allow a JSONPath filter expression in InputPath' do
+    j = File.read "test/pass-with-filter-expression-inputpath.json"
+    linter = StateMachineLint::Linter.new
+    problems = linter.validate(j)
+    expect(problems.size).to eq(0)
+  end
+
+  it 'should allow JSONPath filter expressions in ResultSelector' do
+    j = File.read "test/map-with-filter-expression-resultselector.json"
+    linter = StateMachineLint::Linter.new
+    problems = linter.validate(j)
+    expect(problems.size).to eq(0)
+  end
+
+  it 'should reject an unclosed JSONPath filter expression' do
+    j = File.read "test/pass-with-unclosed-filter-expression-inputpath.json"
+    linter = StateMachineLint::Linter.new
+    problems = linter.validate(j)
+    expect(problems.size).to eq(1)
+  end
 end
